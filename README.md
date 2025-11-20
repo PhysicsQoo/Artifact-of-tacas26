@@ -1,70 +1,79 @@
-# QUPRS Artifact-of-tacas26
+# Artifact for TACAS'26: Equivalence Checking of Quantum Circuits via Path-Sum and Weighted Model Counting
+
 ## 1. Introduction
-This artifact accompanies the TACAS’26 paper "Equivalence Checking of Quantum Circuits via Path‑Sum and Weighted Model Counting". It provides the code, benchmark inputs, and experiment scripts needed to reproduce the paper’s results (Tables 1–3 and Figure 3). The package is intended to validate correctness and enable reproducible experiments; exact runtimes may vary with hardware and environment.
+This artifact accompanies the paper **"Equivalence Checking of Quantum Circuits via Path-Sum and Weighted Model Counting"** submitted to TACAS 2026. It contains the source code, benchmark suites, and experimental scripts necessary to reproduce the empirical results presented in the paper (specifically Tables 2 and 3, and Figure 3). The primary objective of this artifact is to validate the correctness of the proposed methodology and facilitate the reproducibility of the experimental evaluation. While the functional correctness of the results is expected to match the paper, exact execution times may vary depending on the underlying hardware and system environment.
 
-## 2. Download, installation, and testing
+## 2. Setup and Installation
 
-- Full reproduction: run the experiment scripts described in the README to regenerate data of Tables 1–3 and Figure 3. Results should match the paper’s correctness outcomes; measured runtimes may differ across machines.
-- Notes: slower machines tend to produce more timeouts; machines with limited RAM may incur more out-of-memory failures. Verify logs and error messages for troubleshooting.
-### 2.1 Download and Install Docker
-1. Docker: https://docs.docker.com/get-started/get-docker/ 
-2. Install Docker as usual.
-### 2.2 Get Docker Image and Run Container
+We provide a Docker image to ensure a consistent execution environment. The artifact can be deployed using a pre-built image from Docker Hub or Zenodo (recommended for reproducibility), or by building the image locally from the source.
 
-There are two methods to obtain the Docker image and run the container:
+### 2.1 Prerequisites
+Ensure that Docker is installed and the daemon is running. Installation instructions can be found in the [official Docker documentation](https://docs.docker.com/get-started/get-docker/).
 
-#### Method 1: Download Pre-built Image (Recommended for Reproducibility)
-1. Download the Docker image from Zenodo:
-   ```bash
-   wget https://zenodo.org/record/xxxxxxx/files/tacas26.tar?download=1 -O tacas26.tar
-   ```
-2. Load the image into Docker:
-   ```bash
-   docker load -i tacas26.tar
-   ```
+### 2.2 Obtaining the Artifact
 
-#### Method 2: Build Image from Dockerfile (For Development or Customization)
-1. Clone the repository:
-   ```bash
-   git clone git@github.com/PhysicsQoo/Artifact-of-tacas26.git
-   cd Artifact-of-tacas26
-   ```
-2. Build the Docker image from the Dockerfile:
-   ```bash
-   docker build -t tacas26 .
-   ```
+#### Option A: Pull from Docker Hub
+To obtain the latest version of the artifact image:
+```bash
+docker pull physicsqoo/tacas26
+```
 
-#### Run the Container (Common Step for Both Methods)
-After obtaining the image using either method, create and run a new container:
+#### Option B: Load Pre-built Image (Recommended)
+For strict reproducibility, download the archived image from Zenodo:
+```bash
+wget https://zenodo.org/record/xxxxxxx/files/tacas26.tar?download=1 -O tacas26.tar
+docker load -i tacas26.tar
+```
+
+#### Option C: Build from Source
+To build the image locally for development or inspection:
+```bash
+git clone git@github.com/PhysicsQoo/Artifact-of-tacas26.git
+cd Artifact-of-tacas26
+docker build -t tacas26 .
+```
+
+### 2.3 Execution
+Launch an interactive container instance using the image obtained above:
 ```bash
 docker run -it tacas26
 ```
-Upon executing this command, you will automatically enter the container's shell environment. Each new container provides an isolated environment derived from the image.
+This command initializes an isolated shell environment with all dependencies pre-configured.
 
-#### Testing
-
-To run the unit tests:
-
+### 2.4 Verification
+To verify the installation and ensure the tool functions correctly, execute the unit test suite:
 ```bash
 pytest
 ```
 
-## 3. Generating Table Results
+## 3. Experimental Evaluation
 
-To reproduce the data for Tables 1-3 and Figure 3 from the paper:
+The following steps describe how to reproduce the experimental data reported in the paper.
 
-1.  Navigate to the experiments directory:
+### 3.1 Reproduction Steps
+1.  Navigate to the experiments directory within the container:
     ```bash
     cd experiments/
     ```
-2.  Run the experiment scripts:
+2.  Execute the reproduction scripts corresponding to the specific tables and figures:
     ```bash
-    python table_MQT.py            # Generates data for Table 2, Figure 3(b), Table 3(a)
-    python table_Feynman.py        # Generates data for Figure 3(a)
-    python table_MQT_Random_Rotation.py # Generates data for Table 3(b)
+    # Reproduces data for Table 2, Figure 3(b), and Table 3(a)
+    python table_MQT.py
+    
+    # Reproduces data for Figure 3(a)
+    python table_Feynman.py
+    
+    # Reproduces data for Table 3(b)
+    python table_MQT_Random_Rotation.py
     ```
-3.  The results will be saved in the `Results` directory, located one level up from the `experiments` directory:
-    ```bash
-    cd ../Results/
-    ```
-    The output files are named dynamically, incorporating the table type and a timestamp (e.g., `Table_MQT_NOYYYYMMDDHHMMSS.csv`).
+
+### 3.2 Results Analysis
+Upon completion, the generated data will be stored in the `Results` directory:
+```bash
+cd ../Results/
+```
+Output files are generated in CSV format with timestamps (e.g., `Table_MQT_NOYYYYMMDDHHMMSS.csv`).
+
+**Note on Performance:**
+- **Correctness:** The logical outcomes (equivalence/non-equivalence) should strictly match the results reported in the paper.
+- **Runtimes:** Measured execution times may deviate from the published results due to hardware differences. Slower machines may experience increased timeouts, and systems with limited memory may encounter out-of-memory exceptions. Please consult the logs for detailed error diagnostics.
