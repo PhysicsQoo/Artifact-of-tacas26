@@ -11,24 +11,27 @@ We provide a Docker image to ensure a consistent execution environment. The arti
 Ensure that Docker is installed and the daemon is running. Installation instructions can be found in the [official Docker documentation](https://docs.docker.com/get-started/get-docker/).
 
 ### 2.2 Obtaining the Artifact
+We provide three methods to obtain the artifact. **Option A is recommended** for most reviewers due to download speed.
 
-#### Option A: Pull from Docker Hub
-To obtain the latest version of the artifact image:
+#### Option A: Pull from Docker Hub (Recommended for Review)
+This is the fastest way to get the environment running.
 ```bash
 docker pull physicsqoo/tacas26
+docker tag physicsqoo/tacas26 tacas26
 ```
 
-#### Option B: Load Pre-built Image (Recommended)
-For strict reproducibility, download the archived image from Zenodo:
+#### Option B: Load Pre-built Image
+This image is hosted on Zenodo (DOI: 10.5281/zenodo.xxxxxxx) and is cryptographically guaranteed to match the submitted version. Use this if strict archival verification is required or if Docker Hub is inaccessible.
 ```bash
 wget https://zenodo.org/record/xxxxxxx/files/tacas26.tar?download=1 -O tacas26.tar
 docker load -i tacas26.tar
 ```
 
 #### Option C: Build from Source
-To build the image locally for development or inspection:
+**⚠️ Important Note:** This artifact is designed for **Linux (x86_64/amd64)** environments. While Docker Desktop on macOS (Apple Silicon) allows emulation (via Rosetta/QEMU), building this artifact locally on macOS often fails or stalls due to emulation overheads during dependency solving.
+
 ```bash
-git clone git@github.com/PhysicsQoo/Artifact-of-tacas26.git
+git clone https://github.com/PhysicsQoo/Artifact-of-tacas26.git
 cd Artifact-of-tacas26
 docker build -t tacas26 .
 ```

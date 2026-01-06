@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 # Base image: Miniconda3
-FROM continuumio/miniconda3
+FROM --platform=linux/amd64 continuumio/miniconda3
 
 # Set working directory
 WORKDIR /app
@@ -27,7 +27,7 @@ RUN wget http://ftp.debian.org/debian/pool/main/libf/libffi/libffi7_3.3-6_amd64.
     rm -rf /var/lib/apt/lists/*
 
 # Clone QuPRS repository into /app
-RUN git clone https://github.com/PhysicsQoo/QuPRS.git /app
+RUN git clone --branch v0.9.1 --depth 1 https://github.com/PhysicsQoo/QuPRS.git /app
 
 # Install Python dependencies and clean pip cache
 RUN pip install -e .[dev] && \
