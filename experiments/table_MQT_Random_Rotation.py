@@ -38,7 +38,7 @@ with open(output_file, 'w', newline='') as csvfile:
     writer.writeheader()
 
 path1 = "../benchmarks/MQTBench/"
-path2 = "../benchmarks/MQTBench/h,ry,rz,cx/"
+path2 = "../benchmarks/MQTBench/Random_Rotation/"
 
 files =os.listdir(path1)
 files = list(filter(lambda x: x.endswith('.qasm'), files))

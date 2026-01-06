@@ -21,9 +21,9 @@ docker tag physicsqoo/tacas26 tacas26
 ```
 
 #### Option B: Load Pre-built Image
-This image is hosted on Zenodo (DOI: 10.5281/zenodo.xxxxxxx) and is cryptographically guaranteed to match the submitted version. Use this if strict archival verification is required or if Docker Hub is inaccessible.
+This image is hosted on Zenodo (DOI: 10.5281/zenodo.18158735) and is cryptographically guaranteed to match the submitted version. Use this if strict archival verification is required or if Docker Hub is inaccessible.
 ```bash
-wget https://zenodo.org/record/xxxxxxx/files/tacas26.tar?download=1 -O tacas26.tar
+wget "https://zenodo.org/records/18158735/files/tacas26.tar?download=1" -O tacas26.tar
 docker load -i tacas26.tar
 ```
 
@@ -77,6 +77,21 @@ cd ../Results/
 ```
 Output files are generated in CSV format with timestamps (e.g., `Table_MQT_NOYYYYMMDDHHMMSS.csv`).
 
-**Note on Performance:**
-- **Correctness:** The logical outcomes (equivalence/non-equivalence) should strictly match the results reported in the paper.
-- **Runtimes:** Measured execution times may deviate from the published results due to hardware differences. Slower machines may experience increased timeouts, and systems with limited memory may encounter out-of-memory exceptions. Please consult the logs for detailed error diagnostics.
+### 4. Experimental Setup & Performance Baseline
+**Baseline Hardware (Paper Results):**
+All results reported in the paper were conducted on the following environment:
+* **Instance Type:** Microsoft Azure Standard E8ads v5
+* **CPU:** 8 vCPUs (AMD EPYC™ 7763v, 3rd Gen Milan)
+* **Memory:** 64 GiB
+* **OS:** Linux Ubuntu
+
+**Reproducibility Expectations:**
+
+* **Correctness (Strict Match):**
+    The logical outcomes (e.g., equivalence/non-equivalence verdicts) are deterministic and should **strictly match** the results reported in the paper, regardless of the hardware.
+
+* **Memory Usage & OOMs:**
+    Full reproduction requires significant memory. If running on a machine with limited RAM (< 16GB), **Out-of-Memory (OOM) errors** on memory-intensive benchmarks are expected. This reflects hardware constraints, not a defect in the tool.
+
+* **Runtimes & Timeouts:**
+    Absolute execution times will deviate from the published results due to CPU differences and **virtualization overhead** (especially on Docker for macOS/Windows). Slower machines may experience increased timeouts on hard instances.

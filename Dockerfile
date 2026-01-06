@@ -32,7 +32,7 @@ RUN git clone --branch v0.9.1 --depth 1 https://github.com/PhysicsQoo/QuPRS.git 
 # Install Python dependencies and clean pip cache
 RUN pip install -e .[dev] && \
     pip install tqdm psutil && \
-    pip install quokka_sharp==2.7 mqt.qcec pyzx && \
+    pip install quokka_sharp==2.7 mqt.qcec==2.8.2 pyzx==0.9.0 && \
     rm -rf ~/.cache/pip ./dist
 
 # Copy test and benchmark files into the container
