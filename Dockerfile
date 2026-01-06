@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 # Base image: Miniconda3
-FROM --platform=linux/amd64 continuumio/miniconda3
+FROM continuumio/miniconda3
 
 # Set working directory
 WORKDIR /app

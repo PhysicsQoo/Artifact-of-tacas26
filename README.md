@@ -27,13 +27,13 @@ wget https://zenodo.org/record/xxxxxxx/files/tacas26.tar?download=1 -O tacas26.t
 docker load -i tacas26.tar
 ```
 
-#### Option C: Build from Source
+#### Option C: Build from Source (Linux x86_64 Only)
 **⚠️ Important Note:** This artifact is designed for **Linux (x86_64/amd64)** environments. While Docker Desktop on macOS (Apple Silicon) allows emulation (via Rosetta/QEMU), building this artifact locally on macOS often fails or stalls due to emulation overheads during dependency solving.
 
 ```bash
 git clone https://github.com/PhysicsQoo/Artifact-of-tacas26.git
 cd Artifact-of-tacas26
-docker build -t tacas26 .
+docker build --platform linux/amd64 -t tacas26 .
 ```
 
 ### 2.3 Execution
