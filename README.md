@@ -23,8 +23,8 @@ docker tag physicsqoo/tacas26 tacas26
 #### Option B: Load Pre-built Image
 This image is hosted on Zenodo (DOI: 10.5281/zenodo.18158735) and is cryptographically guaranteed to match the submitted version. Use this if strict archival verification is required or if Docker Hub is inaccessible.
 ```bash
-wget "https://zenodo.org/records/18158735/files/tacas26.tar?download=1" -O tacas26.tar
-docker load -i tacas26.tar
+wget "https://zenodo.org/records/18158735/files/tacas26.tar.gz?download=1" -O tacas26.tar.gz
+docker load -i tacas26.tar.gz
 ```
 
 #### Option C: Build from Source (Linux x86_64 Only)

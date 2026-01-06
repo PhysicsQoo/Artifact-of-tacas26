@@ -1,4 +1,4 @@
-# Copyright 2025 Wei-Jia Huang
+# Copyright 2025-2026 Wei-Jia Huang
 # SPDX-License-Identifier: MIT
 
 # Base image: Miniconda3
