@@ -28,7 +28,7 @@ docker load -i tacas26.tar.gz
 ```
 
 #### Option C: Build from Source (Linux x86_64 Only)
-**⚠️ Important Note:** This artifact is designed for **Linux (x86_64/amd64)** environments. While Docker Desktop on macOS (Apple Silicon) allows emulation (via Rosetta/QEMU), building this artifact locally on macOS often fails or stalls due to emulation overheads during dependency solving.
+**⚠️ Important Note:** This artifact is designed for **Linux (x86_64/amd64)** environments. While Docker Desktop on macOS (Apple Silicon) is capable of producing a valid and correct image via emulation (Rosetta/QEMU), please be aware that the build process will be significantly slower and may occasionally stall or fail due to emulation overheads.
 
 ```bash
 git clone https://github.com/PhysicsQoo/Artifact-of-tacas26.git
@@ -38,6 +38,8 @@ docker build --platform linux/amd64 -t tacas26 .
 
 ### 2.3 Execution
 Launch an interactive container instance using the image obtained above:
+
+**⚠️ Important Note:** This artifact is optimized for Linux (amd64). Running it on macOS via Docker Desktop may trigger a crash (`rosetta error: mmap_anonymous_rw mmap failed`) due to incompatibilities with Rosetta 2 emulation.
 ```bash
 docker run -it tacas26
 ```
