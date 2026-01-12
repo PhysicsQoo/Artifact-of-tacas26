@@ -159,7 +159,7 @@ for file in progress_bar:
                 queue.put(process.stdout)
             except Exception as e:
                 queue.put(str(e))
-        feynver_result, feynver_time = safe_verify(feynver_verify_process, circuit1_qc, circuit1_qc, timeout=timeout)
+        feynver_result, feynver_time = safe_verify(feynver_verify_process, circuit1_qc, circuit2_qc, timeout=timeout)
         if feynver_result.startswith("Equal"):
             results["feynver_result"] = 'equivalent'
         elif feynver_result.startswith("Not equal"):
